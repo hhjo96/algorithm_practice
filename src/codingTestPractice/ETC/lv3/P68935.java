@@ -1,4 +1,4 @@
-package codingTestPractice.ETC;
+package codingTestPractice.ETC.lv3;
 
 import java.util.Random;
 

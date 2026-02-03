@@ -1,4 +1,4 @@
-package codingTestPractice.ETC;
+package codingTestPractice.ETC.lv3;
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/12930
 // 문자열 s는 한 개 이상의 단어로 구성되어 있습니다. 각 단어는 하나 이상의 공백문자로 구분되어 있습니다.
