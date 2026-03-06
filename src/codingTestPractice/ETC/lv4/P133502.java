@@ -34,6 +34,7 @@ public class P133502 {
 
         List<Integer> list = new ArrayList<>();
 
+        // 직전 4개가 1231인 경우 삭제한다
         for(int i = 0; i< ingredient.length; i++) {
             list.add(ingredient[i]);
             int n = list.size();
@@ -58,6 +59,7 @@ public class P133502 {
         int[] stack = new int[ingredient.length];
         int top = 0;
 
+        // 이렇게 풀 경우 1231이 발생하면 그 다음에 들어오는 값은 1231이 있던 자리에 덮어쓰게 됨
         for (int x : ingredient) {
             stack[top++] = x;
 
