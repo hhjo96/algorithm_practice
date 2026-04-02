@@ -3,6 +3,8 @@
 (컬럼명: RENT_TYPE)을 추가하여 대여기록을 출력하는 SQL문을 작성해주세요.
 결과는 대여 기록 ID를 기준으로 내림차순 정렬해주세요.
 
+-- https://school.programmers.co.kr/learn/courses/30/lessons/151138
+
 -- 1일부터 30일까지 빌렸으면 30일 빌린 것이므로 datediff 29로 해야 함
 
 SELECT history_id, car_id, date_format(start_date, '%Y-%m-%d') as start_date,
