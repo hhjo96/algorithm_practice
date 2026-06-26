@@ -22,12 +22,15 @@ public class P81302 {
 
     public static void main(String[] args) {
 
+        // P: 사람, X: 파티션
         String[][] places = {{"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"}, {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
                 {"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"}, {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"}, {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"}};
 
         System.out.println(Arrays.toString(solution(places)));
+        System.out.println(Arrays.toString(solution2(places)));
     }
 
+    // 1번 방법
     public static int[] solution(String[][] places) {
 
         int[] answer = new int[5];
@@ -61,6 +64,7 @@ public class P81302 {
             }
         }
 
+        // 모든 p를 검사했을 때 문제가 없으면 1
         return 1;
     }
 
@@ -111,5 +115,82 @@ public class P81302 {
         }
 
         return true;
+    }
+
+
+    // 2번 방법
+    public static int[] solution2(String[][] places) {
+
+        int[] answer = new int[5];
+
+        for (int i = 0; i < 5; i++) {
+
+            char[][] map = new char[5][5];
+
+            for (int j = 0; j < 5; j++) {
+                map[j] = places[i][j].toCharArray();
+            }
+
+            answer[i] = check2(map);
+        }
+
+        return answer;
+    }
+
+    public static int check2(char[][] map) {
+
+        for (int x1 = 0; x1 < 5; x1++) {
+            for (int y1 = 0; y1 < 5; y1++) {
+
+                if (map[x1][y1] != 'P') continue;
+
+                for (int x2 = 0; x2 < 5; x2++) {
+                    for (int y2 = 0; y2 < 5; y2++) {
+
+                        if (x1 == x2 && y1 == y2) continue;
+                        if (map[x2][y2] != 'P') continue;
+
+                        int dist = Math.abs(x1 - x2) + Math.abs(y1 - y2);
+
+                        if (dist > 2) continue;
+
+                        // 거리 1이면 무조건 실패
+                        if (dist == 1) {
+                            return 0;
+                        }
+
+                        // 같은 행
+                        if (x1 == x2) {
+
+                            int mid = (y1 + y2) / 2;
+
+                            if (map[x1][mid] != 'X') {
+                                return 0;
+                            }
+                        }
+
+                        // 같은 열
+                        else if (y1 == y2) {
+
+                            int mid = (x1 + x2) / 2;
+
+                            if (map[mid][y1] != 'X') {
+                                return 0;
+                            }
+                        }
+
+                        // 대각선
+                        else {
+
+                            if (map[x1][y2] != 'X' || map[x2][y1] != 'X') {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return 1;
     }
 }
