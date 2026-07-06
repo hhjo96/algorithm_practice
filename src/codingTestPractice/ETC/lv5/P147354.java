@@ -13,9 +13,48 @@ package codingTestPractice.ETC.lv5;
 //테이블의 데이터 data와 해시 함수에 대한 입력 col, row_begin, row_end이 주어졌을 때 테이블의
 // 해시 값을 return 하도록 solution 함수를 완성해주세요.
 
+import java.util.Arrays;
+
 public class P147354 {
     public static void main(String[] args) {
+    
+        int[][] data = {{2,2,6},{1,5,10},{4,2,9},{3,8,3}};
+        System.out.println("solution(data, 2, 2, 3) = " + solution(data, 2, 2, 3));
 
     }
 
+    public static int solution(int[][] data, int col, int row_begin, int row_end) {
+        // bitwise xor: 다르면 1 같으면 0
+        // col은 1부터 시작하는 번호라서 배열 인덱스에 맞게 -1
+        int colIndex = col - 1;
+
+        // 1. col번째 컬럼 기준 오름차순 정렬
+        // 2. 값이 같으면 첫 번째 컬럼 기준 내림차순 정렬
+        Arrays.sort(data, (a, b) -> {
+            // 예를들면 a: {2, 2, 6} b: {3, 2, 5}
+            if (a[colIndex] == b[colIndex]) {// col번째 값이 같다면
+                return b[0] - a[0];
+                // 빼기가 양수면 b가 먼저, 음수면 a가 먼저, 0이면 그대로 -> 첫번째컬럼이 큰게 앞으로 오므로 내림차순
+            }
+            return a[colIndex] - b[colIndex];
+        });
+
+        int answer = 0;
+
+        // row_begin, row_end도 1부터 시작하는 행 번호
+        for (int i = row_begin; i <= row_end; i++) {
+
+            int sum = 0;
+
+            // 정렬된 후 i번째 행은 data[i - 1]
+            for (int value : data[i - 1]) {
+                sum += value % i;
+            }
+
+            // XOR 누적
+            answer ^= sum;
+        }
+
+        return answer;
+    }
 }
