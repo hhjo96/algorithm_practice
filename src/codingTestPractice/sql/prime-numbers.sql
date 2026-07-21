@@ -11,12 +11,14 @@ For example, the output for all prime numbers  would be:
  */
 
 -- numbers 가 임시테이블이름
--- 2부터 1씩 늘어나는데 2가 1000보다 작으므로 3추가, 4이 1000보다 작으므로 4추가 이런식임
+-- 2부터 1씩 늘어나는데 2가 1000보다 작으므로 3추가, 3이 1000보다 작으므로 4추가 이런식임(1000까지 들어가게 됨)
 WITH RECURSIVE numbers AS (
     SELECT 2 AS n -- 2 하나를 n이라는 이름의 컬럼으로 만든 것
     UNION ALL
     SELECT n + 1 FROM numbers WHERE n < 1000
 ),
+
+    -- 소수만 걸러내기
                primes AS (
                    SELECT n
                    FROM numbers a
@@ -25,4 +27,5 @@ WITH RECURSIVE numbers AS (
                        WHERE b.n < a.n AND b.n > 1 AND a.n % b.n = 0
                    )
                )
+-- 문제 요구사항대로 &붙여서 연걸
 SELECT GROUP_CONCAT(n ORDER BY n SEPARATOR '&') FROM primes;
