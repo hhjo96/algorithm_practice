@@ -1,7 +1,9 @@
 package codingTestPractice.ETC.lv5;
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/118667
-//
+// 길이가 같은 두 개의 큐를 나타내는 정수 배열 queue1, queue2가 매개변수로 주어집니다.
+// 각 큐의 원소 합을 같게 만들기 위해 필요한 작업의 최소 횟수를 return 하도록 solution 함수를 완성해주세요.
+// 단, 어떤 방법으로도 각 큐의 원소 합을 같게 만들 수 없는 경우, -1을 return 해주세요.
 
 import java.util.ArrayDeque;
 import java.util.Queue;
